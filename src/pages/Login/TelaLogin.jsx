@@ -1,13 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { initializeApp } from 'firebase/app'
+import { firebaseConfig } from '../../config/firebase';
 import {
   KeyboardAvoidingView,
   StyleSheet,
   Text,
   View,
-  Platform
+  Platform,
+  Alert
 } from 'react-native';
+import { useAuth } from '../../contexts/Auth';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import Input from '../../Components/Input/Index'
@@ -15,45 +19,23 @@ import Button from '../../Components/Button/Button'
 
 //import firebase from '../../config/firebase';
 
-export default function TelaLogin({navigation}) {
+export default function TelaLogin({ navigation }) {
   //const navigation = useNavigation();
   //const database = firebase.firestore()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorLogin, setErrorLogin] = useState('')
-  /*  
-      useEffect (() => {
-        const unsubscribe = auth.onAuthStateChaged(user => {
-          if(user){
-            navigation.navigate("Home")
-          }
-        })
-  
-        return unsubscribe
-      },[]) 
-  
-      const handleSignUp = () =>{
-          auth
-          .createUserWithEmailAndPassword(email,password)
-          .then(userCredentials => {
-              const user = userCredentials.user;
-              console.log('Register with: ', user.email);
-          })
-          .catch(error => alert(error.message))
-      }
-  
-      const handleLogin = () => {
-        auth
-        .signInWithEmailAndPassword(email, password)
-        .then(userCredentials => {
-          const user = userCredentials.user;
-          console.log('Logged in with: ', user.email);
-        })
-  
-      }
-    */
-   const navigate = () => {navigation.navigate('Home')}
+
+  const app = initializeApp(firebaseConfig)
+  const auth = getAuth(app)
+  const {signIn} = useAuth()
+
+/*   function signIn() {
+
+  } */
+
+  const navigate = () => { navigation.navigate('Home') }
   return (
 
     <KeyboardAvoidingView
@@ -93,16 +75,16 @@ export default function TelaLogin({navigation}) {
         ?
         <Button textButton='Login' />
         :
-        <Button textButton='Login' functionButton={() => {}} />
+        <Button textButton='Login' functionButton={signIn(email, password)} />
       }
-      <Text 
+      <Text
         style={styles.buttonOutlineText}>
-        Ainda não é Registrado? 
+        Ainda não é Registrado?
         <Text
-        style={styles.linkRegister}
-        onPress={()=> navigation.navigate("Register")}
+          style={styles.linkRegister}
+          onPress={() => navigation.navigate("Register")}
         >
-        Faça agora
+          Faça agora
         </Text>
       </Text>
     </KeyboardAvoidingView >

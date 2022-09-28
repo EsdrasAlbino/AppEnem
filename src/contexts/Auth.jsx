@@ -1,14 +1,19 @@
-/*import React, {createContext, useContext, useEffect, useState} from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 //import {authService} from '../service/authService';
 import {Alert} from 'react-native';
-
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
+import {initializeApp} from 'firebase/app'
+import { firebaseConfig } from '../config/firebase';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
   const [authData, setAuthData] = useState('');
   const [isLoading, setisLoading] = useState(true);
+
+  const app = initializeApp(firebaseConfig);
+  const auth  = getAuth(app)
 
   useEffect(() => {
     loadStorageData();
@@ -29,15 +34,18 @@ export const AuthProvider = ({children}) => {
     }
   }
 
-  /*async function signIn(email, password) {
-    try {
-      const authData = await authService.signIn(email, password);
+  async function signIn(email, password) {
+    console.log("Logando!")
+    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+      console.log("Signed in")
+      const user = userCredential.user
+      console.log(user)
+    }).catch((error) => {
+      Alert.alert(error)
+    })
 
-      setAuthData(authData);
-      AsyncStorage.setItem('@AuthData', JSON.stringify(authData));
-    } catch (error) {
-      Alert.alert(error.message, 'Tente novamente');
-    }
+    navigation.navigate("Home", { idUser: user.uid})
+
   }
   async function signOut() {
     setAuthData(undefined);
@@ -59,4 +67,4 @@ export function useAuth() {
   }
 
   return context;
-}*/
+}

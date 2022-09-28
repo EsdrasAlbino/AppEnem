@@ -7,19 +7,12 @@ import HomeScreen from '../pages/Login/TelaLogin'
 import SettingScreen from '../pages/Config/TelaConfig'
 import TelaMat from '../pages/TelaMat/TelaMat'
 import TelaPort from '../pages/TelaPort/TelaPort'
-import Register from '../pages/NewUser/'
+
 
 export function StackRoutes() {
   return (
 
     <Stack.Navigator initialRouteName='Home'>
-      <Stack.Screen 
-        name="Register" 
-        component={Register}
-        options={{
-          headerShown: false,
-        }}
-      />
       <Stack.Screen 
         name="Home" 
         component={HomeScreen}
