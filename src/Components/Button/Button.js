@@ -9,7 +9,7 @@ import React from "react";
 import { LinearGradient } from 'expo-linear-gradient';
 
 
-export default function Input(props, { navigation }) {
+export function Button(props, { navigation }) {
   return (
     <View style={styles.buttonContainer}>
       <LinearGradient

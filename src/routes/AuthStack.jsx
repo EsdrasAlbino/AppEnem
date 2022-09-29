@@ -3,8 +3,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 //const {Navigator, Screen} = createNativeStackNavigator();   
 const Stack = createNativeStackNavigator();
 
-import TelaLogin from '../pages/Login/TelaLogin'
-import Register from '../pages/NewUser/'
+import {
+  TelaLogin,
+  NewUser
+} from '../pages'
 //import {useTheme} from 'styled-components';
 
 export function AuthStack() {
@@ -27,7 +29,7 @@ export function AuthStack() {
       />
       <Stack.Screen
         name="Register"
-        component={Register}
+        component={NewUser}
         options={{
           headerShown: false,
         }}

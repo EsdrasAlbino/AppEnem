@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
-import { firebaseConfig } from '../../config/firebase';
+import { firebaseConfig } from '../../services/firebase';
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -14,12 +14,12 @@ import {
 import { useAuth } from '../../contexts/Auth';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import Input from '../../Components/Input/Index'
-import Button from '../../Components/Button/Button'
+import {Input} from '../../Components/Input'
+import {Button} from '../../Components/Button/Button'
 
 //import firebase from '../../config/firebase';
 
-export default function TelaLogin({ navigation }) {
+export function TelaLogin({ navigation }) {
   //const navigation = useNavigation();
   //const database = firebase.firestore()
 
@@ -29,11 +29,11 @@ export default function TelaLogin({ navigation }) {
 
   const app = initializeApp(firebaseConfig)
   const auth = getAuth(app)
-  const {signIn} = useAuth()
+  const { signIn } = useAuth()
 
-/*   function signIn() {
-
-  } */
+  /*   function signIn() {
+  
+    } */
 
   const navigate = () => { navigation.navigate('Home') }
   return (
@@ -42,7 +42,7 @@ export default function TelaLogin({ navigation }) {
       behavior={Platform.OS == "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <Text style={styles.textTop}>Login</Text>
+       <Text style={styles.textTop}>Login</Text>
 
       <Input
         placeholder='Email'
@@ -86,7 +86,7 @@ export default function TelaLogin({ navigation }) {
         >
           Faça agora
         </Text>
-      </Text>
+      </Text> 
     </KeyboardAvoidingView >
 
   );

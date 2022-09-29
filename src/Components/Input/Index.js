@@ -1,7 +1,7 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import React from "react";
 
-export default function Input(props) {
+export function Input(props) {
   return (
     <View style={styles.inputContainer}>
       <TextInput

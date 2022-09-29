@@ -1,6 +1,6 @@
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
-import {initializeApp} from 'firebase/app'
-import { firebaseConfig } from '../../config/firebase';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../../services/firebase";
 import React, { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -11,29 +11,30 @@ import {
   Alert,
 } from "react-native";
 
-import Input from "../../Components/Input/Index";
+import Input from "../../Components/Input";
 import Button from "../../Components/Button/Button";
 
-export default function NewUser({ navigation }) {
-
+export function NewUser({ navigation }) {
   const [nomeComplete, setNomeComplete] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const app = initializeApp(firebaseConfig);
-  const auth  = getAuth(app)
+  const auth = getAuth(app);
 
   function SignUp() {
-    createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      console.log("User Register!")
-      const user = userCredential.user
-    }).catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      Alert.alert(errorMessage)
-    })
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log("User Register!");
+        const user = userCredential.user;
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        Alert.alert(errorMessage);
+      });
 
-    navigation.navigate("Home", { idUser: user.uid})
+    navigation.navigate("Home", { idUser: user.uid });
   }
 
   const navigate = () => {
@@ -44,7 +45,7 @@ export default function NewUser({ navigation }) {
       behavior={Platform.OS == "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <Text style={styles.textTop}>Registro</Text>
+   <Text style={styles.textTop}>Registro</Text>
 
       <Input
         placeholder="Nome Completo"
@@ -78,7 +79,7 @@ export default function NewUser({ navigation }) {
         >
           Clique Aqui
         </Text>
-      </Text>
+      </Text> 
     </KeyboardAvoidingView>
   );
 }

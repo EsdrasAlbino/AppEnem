@@ -1,27 +1,19 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import firebase from '../../config/firebase';
+import { View, Text, StyleSheet } from 'react-native';
+import firebase from '../../services/firebase';
 
-import {useNavigation} from '@react-navigation/native';
-import {MyButton} from '../../Components/MyButton/MyButton';
+import { useNavigation } from '@react-navigation/native';
+import { Button } from '../../Components/Button/Button';
+import { MateriasHome } from '../../Components/MateriasHome/MateriasHome';
 
-
-export default function HomeScreen() {
-  const navigation = useNavigation();
-  const database = firebase.firestore()
+export function HomeScreen({navigation}) {
+  //const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Essa tela só pode ser vista por usuários autenticados
-      </Text>
-      <MyButton
-        title="Ir para Configurações"
-        onPress={() => navigation.navigate('Settings')}
-      />
-      <Text>
-        by <Text style={styles.coffText}>Coffstack</Text>
-      </Text>
+      <Text style={styles.textTop}>Matérias</Text>
+      <MateriasHome onPress={()=>{navigation.navigate("TelaPort")}} textContent="Português" nomeIcon="book" />
+      <MateriasHome onPress={()=>{navigation.navigate("TelaMat")}} textContent="Matemática" nomeIcon="calculator" />
     </View>
   );
 }
@@ -29,20 +21,16 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 32,
+    backgroundColor: '#7C4CE6',
+    paddingTop: Platform.OS === "ios" ? 0 : 50,
   },
-  title: {
-    fontWeight: 'bold',
-
-    fontSize: 20,
+  textTop: {
     textAlign: 'center',
-  },
-  coffText: {
-    color: '#550AB1',
-    fontWeight: 'bold',
+    color: '#fff',
+    fontSize: 40,
+    padding: 40,
+    fontWeight: 'bold'
   },
 });

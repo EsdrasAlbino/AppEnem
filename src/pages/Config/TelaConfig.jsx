@@ -1,32 +1,32 @@
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
-import { auth } from '../../config/firebase';
+import { auth } from '../../services/firebase';
 
-export default function SettingScreen ( {navigation} ) {
+export function SettingScreen({ navigation }) {
 
-    const handleSignOut = () =>{
+    const handleSignOut = () => {
         auth
-        .signOut()
-        .then(()=>{
-            navigation.replace('Login')
-        })
-        .catch(error => alert(error.message))
+            .signOut()
+            .then(() => {
+                navigation.replace('Login')
+            })
+            .catch(error => alert(error.message))
 
 
     }
 
     return (
-      <View style={styles.container}>
-        <Text>TelaConfiguracao</Text>
-        <TouchableOpacity
-            onPress={handleSignOut}
-            style={styles.button}
-        >
-            <Text style={styles.buttonText}>Sair</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.container}>
+         {/*    <Text>TelaConfiguracao</Text>
+            <TouchableOpacity
+                onPress={handleSignOut}
+                style={styles.button}
+            >
+                <Text style={styles.buttonText}>Sair</Text>
+            </TouchableOpacity> */}
+        </View>
     )
-  }
+}
 
 
 const styles = StyleSheet.create({

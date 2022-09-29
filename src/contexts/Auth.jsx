@@ -2,13 +2,13 @@ import React, {createContext, useContext, useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 //import {authService} from '../service/authService';
 import {Alert} from 'react-native';
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
 import {initializeApp} from 'firebase/app'
-import { firebaseConfig } from '../config/firebase';
+import { firebaseConfig } from '../services/firebase';
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({children}) => {
+export const AuthProvider = ({children, navigation}) => {
   const [authData, setAuthData] = useState('');
   const [isLoading, setisLoading] = useState(true);
 
@@ -20,18 +20,10 @@ export const AuthProvider = ({children}) => {
   }, []);
 
   async function loadStorageData() {
-    try {
-      //Try get the data from Async Storage
-      const authDataSerialized = await AsyncStorage.getItem('@AuthData');
-      if (authDataSerialized) {
-        //If there are data, it's converted to an Object and the state is updated.
-        const _authData = JSON.parse(authDataSerialized);
-        setAuthData(_authData);
-      }
-    } catch (error) {
-    } finally {
-      setisLoading(false);
-    }
+    auth.onAuthStateChanged((user) => {
+      setAuthData(user)
+      setisLoading(false)
+    })
   }
 
   async function signIn(email, password) {
@@ -48,8 +40,8 @@ export const AuthProvider = ({children}) => {
 
   }
   async function signOut() {
-    setAuthData(undefined);
-    AsyncStorage.removeItem('@AuthData');
+     setAuthData(undefined);
+    AsyncStorage.removeItem('@AuthData'); 
   }
 
   return (
