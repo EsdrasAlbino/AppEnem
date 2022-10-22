@@ -3,6 +3,17 @@ App desenvolvido com objetivo de auxiliar estudantes do Ensino Médio que preten
 
 > Prototipo no Figma
 
+<div align="center">
+  <div style="display: flex;">
+    <img src="/assets/imagesPrototipo/X%20-%201.png" />
+    <img src="/assets/imagesPrototipo/X%20-%202.png" />
+    <img src="/assets/imagesPrototipo/X%20-%203.png" />
+    <img src="/assets/imagesPrototipo/X%20-%204.png" />
+    <img src="/assets/imagesPrototipo/X%20-%205.png" />
+    <img src="/assets/imagesPrototipo/X%20-%206.png" />
+  </div>
+</div>
+
 ![Imagem Prototipo](/assets/imagesPrototipo/X%20-%201.png)
 
 ![Imagem Prototipo](/assets/imagesPrototipo/X%20-%202.png)
