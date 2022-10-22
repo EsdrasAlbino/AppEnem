@@ -20,14 +20,14 @@ export function Routes() {
     }
     return (
         <NavigationContainer>
-{/*             {authData ?
-                 */}
+            {authData ?
+                <>
                     <StackRoutes />
                     <HomeNavigationTabs />
-{/*                 
+                </>
                 :
                 <AuthStack />
-            } */}
+            }
         </NavigationContainer>
     )
 }
